@@ -4,6 +4,7 @@ metadata:
   name: db
   namespace: flm
 spec:
+  serviceName: db
   replicas: 1
   selector:
     matchLabels:
@@ -14,7 +15,25 @@ spec:
         app: db
     spec:
       containers:
-        - name: db
-          image: shashankkambala/python1:dbimage
+        - name: mysql
+          image: mysql/mysql-server:5.7
           ports:
             - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: mysql-root-password
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: mysql-user
+          volumeMounts:
+            - name: db-init-sql
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: db-init-sql
+          configMap:
+            name: db-init-sql   # assumes you created a ConfigMap with database.sql
