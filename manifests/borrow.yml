@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: borrow-service
-          image: shaikmustafa/flm2026:borrowimage
+          image: shashankkambala/python1:borrowimage
           ports:
             - containerPort: 5003
           env:
