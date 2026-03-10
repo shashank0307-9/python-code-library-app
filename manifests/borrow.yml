@@ -19,11 +19,9 @@ spec:
           image: shashankkambala/python1:borrowimage
           ports:
             - containerPort: 5003
-          env:
-            - name: DB_HOST
-              value: "db"
-            - name: DB_PORT
-              value: "3306"
+          envFrom:  
+          - configMapRef:
+              name: bankapp-config
 ---
 apiVersion: v1
 kind: Service
