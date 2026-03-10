@@ -20,4 +20,8 @@ spec:
           ports:
             - containerPort: 3306
           envFrom:
+          - secretRef: 
+              name: bankapp-db-secret
+          - configMapRef:
+              name: bankapp-config
              
