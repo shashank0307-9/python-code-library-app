@@ -18,3 +18,6 @@ spec:
           image: shashankkambala/python1:appimage
           ports:
             - containerPort: 5000
+          envFrom:  
+          - configMapRef:
+              name: bankapp-config
