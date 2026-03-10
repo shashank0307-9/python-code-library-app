@@ -19,3 +19,6 @@ spec:
           image: shashankkambala/python1:authimage
           ports:
             - containerPort: 5001
+          envFrom:  
+          - configMapRef:
+              name: bankapp-config  
